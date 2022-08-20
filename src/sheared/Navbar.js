@@ -46,11 +46,11 @@ const Navbar = ({ children }) => {
                     <li><NavLink to="/about">About</NavLink></li>
                     <li><NavLink to="/courses">Courses</NavLink></li>
                     <li><NavLink to="/contact">Contact</NavLink></li>
-                    {
+                    {/* {
                         user && <>
                             <NavLink><span>{user.displayName}</span></NavLink>
                         </>
-                    }
+                    } */}
                     {
                         user ?
                             <button className='btn btn-link' onClick={handleSignOut}>Sign out</button>

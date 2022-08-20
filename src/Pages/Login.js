@@ -38,6 +38,7 @@ const Login = () => {
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
         signInWithEmailAndPassword(email, password);
+        navigate('/home');
     }
 
     const navigateRegister = event => {

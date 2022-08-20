@@ -16,7 +16,7 @@ const Registration = () => {
     const navigate = useNavigate();
 
     const navigateLogin = () => {
-        navigate('/Login');
+        navigate('/login');
     }
     if (loading || updating) {
         return <Loading></Loading>

@@ -17,8 +17,8 @@ const CourseCard = ({ course }) => {
                 <figure><img src={img} alt="Shoes" /></figure>
                 <div class="card-body">
                     <h2 class="card-title">{name}</h2>
-                    <h2 class="card-title">{price}</h2>
-                    <p>If a dog chews shoes whose shoes does he choose?</p>
+                    <h2 class="card-title">Price:{price}</h2>
+                    <p>{details}</p>
                     <div class="card-actions justify-end">
                         <div className='servicebtn'>
                         <button onClick={() => navigateToCourseDetail(id)} className="btn btn-active"> Buy Now </button>
