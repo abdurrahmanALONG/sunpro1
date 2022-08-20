@@ -1,0 +1,44 @@
+[
+    {
+        "id": "1",
+        "price": 70000,
+        "name": "Disaining",
+        "details": "With over 10 years of experience and a national presence, AR Construction Consulting has the depth of knowledge and operational capacity to provide design and construction services when you need them, where you need them.",
+        "img": "https://i.ibb.co/JFfVyJ3/disaining.jpg"
+    },
+    {
+        "id": "2",
+        "price": 50000,
+        "name": "Planing",
+        "details": "We offers a diverse range of solutions meeting this requirement, and which can be combined to create bespoke packages or applied as standalone services.",
+        "img": " https://i.ibb.co/0mcKYDG/planing.jpg"
+    },
+    {
+        "id": "3",
+        "price": 16000,
+        "name": "Profesonal-drawing",
+        "details": " I am Consulting  the depth of knowledge and operational capacity to provide design and construction services when you need them, where you need them.",
+        "img": "https://i.ibb.co/Z8MJFQp/profesonal-drawing.jpg"
+    },
+    {
+        "id": "4",
+        "price": 10000,
+        "name": "Laboratory-testing",
+        "details": "Structural bearings are critical elements of structures - most notably bridges that provide a load-bearing connection between the superstructure and substructure while allowing the required movements. ",
+        "img": " https://i.ibb.co/NCKf5Bq/laboratory-testing.jpg"
+    },
+    {
+        "id": "5",
+        "price": 7000,
+        "name": "Risk-strategy",
+        "details": "Whether you are in the midst of a property transaction or dealing with regulatory concerns, you need to understand the risks associated with a property.",
+        "img": " https://i.ibb.co/CKjjvB7/risk-strategy.jpg"
+    },
+    {
+        "id": "6",
+        "price": 5000,
+        "name": "Site-inspection",
+        "details": " Professional engineers apply their vast knowledge and expertise to deliver high-quality, cost-conscious technical services with a focus on constructability and sustainable design solutions.",
+        "img": " https://i.ibb.co/82jWdTK/site-inspection.jpg"
+    }
+]

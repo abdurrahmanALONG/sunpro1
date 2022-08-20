@@ -1,7 +1,14 @@
+import { signOut } from 'firebase/auth';
 import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link, NavLink } from 'react-router-dom';
+import auth from '../firebase.init';
 
 const Navbar = ({ children }) => {
+    const [user] = useAuthState(auth);
+    const handleSignOut = () =>
+        signOut(auth);
+
     return (
         <div class="drawer drawer-end">
             <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
@@ -19,7 +26,14 @@ const Navbar = ({ children }) => {
                             <li><NavLink to="/about">About</NavLink></li>
                             <li><NavLink to="/courses">Courses</NavLink></li>
                             <li><NavLink to="/contact">Contact</NavLink></li>
-                            <li><NavLink to="/login">Login</NavLink></li>
+                            {
+                                user ?
+                                    <button className='btn btn-link' onClick={handleSignOut}>Sign out</button>
+                                    :
+                                    <NavLink as={Link} to="Login">
+                                        Login
+                                    </NavLink>
+                            }
                         </ul>
                     </div>
                 </div>
@@ -32,7 +46,19 @@ const Navbar = ({ children }) => {
                     <li><NavLink to="/about">About</NavLink></li>
                     <li><NavLink to="/courses">Courses</NavLink></li>
                     <li><NavLink to="/contact">Contact</NavLink></li>
-                    <li><NavLink to="/login">Login</NavLink></li>
+                    {
+                        user && <>
+                            <NavLink><span>{user.displayName}</span></NavLink>
+                        </>
+                    }
+                    {
+                        user ?
+                            <button className='btn btn-link' onClick={handleSignOut}>Sign out</button>
+                            :
+                            <NavLink as={Link} to="Login">
+                                Login
+                            </NavLink>
+                    }
 
                 </ul>
 

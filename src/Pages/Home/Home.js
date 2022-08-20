@@ -12,7 +12,7 @@ const Home = () => {
             <div className="gap-y-5">
                 <Course></Course>
             </div>
-            <div>
+            <div className="gap-y-5">
                 <Footer></Footer>
             </div>
         </div>

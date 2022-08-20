@@ -1,24 +1,96 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import auth from '../firebase.init';
+import GoogleLogin from './GoogleLogin';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Loading from './Loading';
+
 
 const Login = () => {
+    const emailRef = useRef('');
+    const passwordRef = useRef('');
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || "/";
+    let errorElement;
+
+
+    const [signInWithEmailAndPassword, user, loading, error,] = useSignInWithEmailAndPassword(auth);
+
+    const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
+
+    if (loading || sending) {
+        return <Loading></Loading>
+    }
+
+    if (user) {
+        navigate(from, { replace: true });
+    }
+
+    if (error) {
+        errorElement = <p className='text-danger'>Error: {error?.message}</p>
+    }
+    const handleSubmit = event => {
+        event.preventDefault();
+        const email = emailRef.current.value;
+        const password = passwordRef.current.value;
+        signInWithEmailAndPassword(email, password);
+    }
+
+    const navigateRegister = event => {
+        navigate('/registration');
+    }
+
+    const resetPassword = async () => {
+        const email = emailRef.current.value;
+        if (email) {
+            await sendPasswordResetEmail(email);
+            toast('Sent email');
+        }
+        else {
+            toast('please enter your email address');
+        }
+    }
+
+
     return (
-        <div>
-            <section class="text-gray-600 body-font">
-                <div class="container px-5 py-24 mx-auto flex flex-wrap items-center">
-                    <div class="lg:w-2/6 md:w-1/2 bg-gray-100 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0">
-                        <h2 class="text-gray-900 text-lg font-medium title-font mb-5">Sign Up</h2>
-                        <div class="relative mb-4">
-                            <label for="full-name" class="leading-7 text-sm text-gray-600">Full Name</label>
-                            <input type="text" id="full-name" name="full-name" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
-                        </div>
-                        <div class="relative mb-4">
-                            <label for="email" class="leading-7 text-sm text-gray-600">Email</label>
-                            <input type="email" id="email" name="email" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
-                        </div>
-                        <button class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Button</button>
+        <div className='register-form'>
+            <h2 className='text-primary text-center mt-2 text-6xl'>Please Login</h2>
+            <form onSubmit={handleSubmit}>
+                <div>
+                    <div class="form-control mx-20 px-20">
+                        <label class="label">
+                            <span class="label-text">Your Email</span>
+                        </label>
+                        <label class="input-group input-group-vertical">
+                            <input type="email" name="email" id="" placeholder='Email Address' required />
+                        </label>
                     </div>
                 </div>
-            </section>
+                <div>
+                    <div class="form-control mx-20 px-20">
+                        <label class="label">
+                            <span class="label-text">Your Password</span>
+                        </label>
+                        <label class="input-group input-group-vertical">
+                            <input type="password" name="password" id="" placeholder='password' required />
+                        </label>
+                    </div>
+                </div>
+
+                <input
+                    className='w-50 mx-auto btn btn-primary mt-4'
+                    type="submit"
+                    value="Login" />
+            </form>
+            <p className="my-8"> If you are new here... <Link to="/registration" className='text-primary pe-auto text-decoration-none ' onClick={navigateRegister}>Please Register First</Link> </p>
+            <GoogleLogin></GoogleLogin>
+
+            <p className="my-4">Forget Password? <button className='btn btn-link text-primary pe-auto text-decoration-none' onClick={resetPassword}>Reset Password</button> </p>
+            <ToastContainer/>
         </div>
     );
 };
